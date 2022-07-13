@@ -45,4 +45,4 @@ cargo_packages:
 # Kernel resource manager
 os_environment:
   - key: TPM2TOOLS_TCTI
-    value : "device:/dev/tpmrm0"
+    value : "device:/dev/tpmrm0"    

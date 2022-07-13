@@ -4,6 +4,12 @@
     chdir: /root/rust-keylime
   changed_when: false
 
+- name: Run Cargo build
+  shell: "cargo build"
+  args:
+    chdir: /root/rust-keylime
+  changed_when: false
+
 - name: Set TPM2TOOLS_TCTI environment variable
   lineinfile:
     dest: /etc/environment

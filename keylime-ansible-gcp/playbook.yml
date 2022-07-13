@@ -1,5 +1,20 @@
 ---
-- hosts: all
+- hosts: localhost 
+  roles: 
+    - create-gcp
+  gather_facts: no
+  connection: local
+  vars:
+    - gcp_project: "{{ lookup('ansible.builtin.env','GCP_PROJECT') }}"
+    - gcp_cred_kind: "{{ lookup('ansible.builtin.env','GCP_CRED_KIND') }}"
+    - gcp_cred_file: "{{ lookup('ansible.builtin.env','GCP_CRED_FILE') }}"
+    - zone: "{{ lookup('ansible.builtin.env','GCP_ZONE') }}"
+    - region: "{{ lookup('ansible.builtin.env','GCP_REGION') }}"
+  post_tasks:
+    - name: Wait to SSH into instance
+      wait_for: delay=5 sleep=5 host={{ address.address }} port=22 state=started timeout=100
+
+- hosts: gcp_instance
   become: true
   become_user: root
   pre_tasks:
@@ -19,4 +34,4 @@
         name: libselinux-python3
         state: present
   roles:
-    - keylime-gcp
+    - keylime-gcp    

@@ -71,5 +71,6 @@
         - openssl-devel 
         - zeromq-devel
         - libarchive-devel 
+        - cargo
         
-      state: latest
+      state: latest      
