@@ -8,6 +8,7 @@
     - gcp_project: "{{ lookup('ansible.builtin.env','GCP_PROJECT') }}"
     - gcp_cred_kind: "{{ lookup('ansible.builtin.env','GCP_CRED_KIND') }}"
     - gcp_cred_file: "{{ lookup('ansible.builtin.env','GCP_CRED_FILE') }}"
+    - gcp_cred_email: "{{ lookup('ansible.builtin.env','GCP_CRED_EMAIL') }}"
     - zone: "{{ lookup('ansible.builtin.env','GCP_ZONE') }}"
     - region: "{{ lookup('ansible.builtin.env','GCP_REGION') }}"
   post_tasks:

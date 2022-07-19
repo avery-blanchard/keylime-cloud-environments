@@ -9,23 +9,37 @@ For details on using Keylime, please consult the
 For details on the Rust agent, please consult the [repository](https://github.com/keylime/rust-keylime).
 
 ## Configuration
-1.  Install dependecies for the Ansible - GCP module 
-`$ pip3 install requests google-auth`
-2. [Create a GCP service account](https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount) for ansible's use.
-3. [Create and download keys linked to this service account](https://support.google.com/cloud/answer/6158849?hl=en&ref_topic=6262490#serviceaccounts&zippy=%2Cservice-accounts)
-4. Add path to ssh key to ansible config (/etc/ansible/ansible.conf) \
-Note: the ssh private key is in the downloaded file. Extract it, place it in its own file, set adequate permissions, and add the path to this newly created file to the ansible config. \
-Example:\
-[defaults] \
-private_key_file = /home/user/my_key
-
-5. Set environment variables \
-`$ export GCP_PROJECT="<name of GCP project>"` \
-`$ export GCP_CRED_KIND="serviceaccount"`\
-`$ export GCP_CRED_FILE="<path to your service account key file>"` \
-`$ export GCP_ZONE="<zone for GCP instance>"` \
-`$ export GCP_REGION="<region for GCP instance>"` 
-
+1. Install Pip \
+`$ dnf install python3-pip python3-wheel`
+2.  Install dependecies for the Ansible - GCP module \
+`$ pip3 install requests google-auth ansible` \
+`$ pip3 install ansible --update`
+3. [Create GCP project](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+4. Enable Compute Engine for this project. \
+To do so, select the naivgation menu (the three bars to the left of the GCP logo), hover over "APIs & Services", click "Dashboard", select "+ ENABLE APIS AND SERVICES", search for "Compute Engine API", select and enable. 
+4. [Create a GCP service account](https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount) for ansible's use. 
+5. [Create and download keys linked to this service account](https://support.google.com/cloud/answer/6158849?hl=en&ref_topic=6262490#serviceaccounts&zippy=%2Cservice-accounts). Note: download the keys in JSON format.
+6. Create ssh key pair \
+` ssh-keygen -t rsa` 
+7. Add the ssh public key to the Metadata section of Compute Engine in Google Cloud Platform. (Compute Engine>Settings>Metadata>SSH) 
+8. Add path to ssh private key to ansible config (`/etc/ansible/ansible.conf`) \
+Example:
+```
+[defaults] 
+private_key_file = /home/.ssh/my_gcp_key
+```
+9. Add values to the environment variables in set_env_var.sh and run the script. \
+`. set_env_var.sh`
+```
+#!/bin/sh
+export GCP_PROJECT= # ID of GCP project
+export GCP_CRED_KIND="serviceaccount" 
+export GCP_CRED_FILE= # path to service account file
+export GCP_CRED_EMAIL= # service account email
+export GCP_ZONE= # zone for GCP instance, ex "northamerica-northeast1-a"
+export GCP_REGION= # region for GCP instance, ex  "northamerica-northeast1"
+```
+Note: the project name is sometimes different from the project ID, check the ID to confirm. Otherwise errors will occur.
 ## Usage
 Run the playbook to create and set up an instance. 
 

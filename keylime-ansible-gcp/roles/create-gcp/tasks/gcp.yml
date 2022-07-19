@@ -47,7 +47,7 @@
     auth_kind: "{{ gcp_cred_kind }}"
     service_account_file: "{{ gcp_cred_file }}"
     service_accounts:
-    - email: '279379130830-compute@developer.gserviceaccount.com'
+    - email: "{{ gcp_cred_email }}"
       scopes: 
         - https://www.googleapis.com/auth/devstorage.read_only
         - https://www.googleapis.com/auth/logging.write
