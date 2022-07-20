@@ -18,6 +18,8 @@
 - hosts: gcp_instance
   become: true
   become_user: root
+  vars:
+    - custom_config: "{{ custom_config }}"
   pre_tasks:
     - name: Probe python installation
       raw: command -v python3 || true

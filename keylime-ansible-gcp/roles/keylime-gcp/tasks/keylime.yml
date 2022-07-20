@@ -1,4 +1,4 @@
-- name: Install keylime dependecies
+- name: Install keylime requirment
   shell: "/usr/bin/pip3 install -r requirements.txt"
   args:
     chdir: /root/keylime
@@ -37,3 +37,27 @@
     regexp: '^tpm_hash_alg'
     line: tpm_hash_alg = sha256
   changed_when: false  
+
+- name: Create allow list
+  shell: "./scripts/create_allowlist.sh /root/allowlist.txt sha256sum"
+  args:
+    chdir: /root/keylime
+  when: custom_config|bool == False
+
+- name: Create exclude list
+  copy:
+    dest: "/root/exclude.txt"
+    content: |
+      /tmp*
+      /var/log*
+      /usr/bin/*
+      /usr/sbin/*
+      /usr/local/bin/*
+      /usr/share/*
+      /usr/lib/*
+      /usr/lib64/*
+      /usr/libexec/*
+      /etc/*
+      /root/keylime
+      /root/rust-keylime
+  when: custom_config|bool== False

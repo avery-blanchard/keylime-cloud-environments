@@ -43,9 +43,17 @@ Note: the project name is sometimes different from the project ID, check the ID 
 ## Usage
 Run the playbook to create and set up an instance. 
 
+If you wish to create your own allow and exclude lists, run the playbook with the command with the flag `-e "custom-config=true"` and read the keylime documentation on [allowlists](https://keylime-docs.readthedocs.io/en/latest/user_guide/runtime_ima.html?highlight=allowlist#keylime-ima-allowlists) and [excludes list](https://keylime-docs.readthedocs.io/en/latest/user_guide/runtime_ima.html?highlight=excludes%20list%20#excludes-list).
+
 ```bash
-ansible-playbook playbook.yml
+ansible-playbook playbook.yml -e "custom-config=True"
 ```
+
+Otherwise, run the playbook with the flag ` -e "custom-config=False"`. This will generate an allowlist and include a default excludes list. 
+```bash
+ansible-playbook playbook.yml -e "custom-config='False'"
+```
+
 ## Getting started with Keylime 
 The best way to get started is to read the [Keylime
 Documentation](https://keylime-docs.readthedocs.io/en/latest/), however if you're keen to get started right away, follow these steps.
@@ -59,6 +67,9 @@ To start the Keylime verifier and registrar, you will need to start the followin
 To start the Keylime rust agent, navigate to the rust-keylime directory and run the following command.
 
 `# RUST_LOG=keylime_agent=trace cargo run --bin keylime_agent`
+
+To register the agent, run the tenant. \
+`# keylime_tenant -v 127.0.0.1 -t 127.0.0.1 -u d432fbb3-d2f1-4a97-9ef7-75bd81c00000 -f /root/excludes.txt --allowlist /root/allowlist.txt --exclude /root/excludes.txt -c add`
 
 You can now set up a use case, a good first scenario to try out would be [IMA
 Integrity Monitoring](https://keylime-docs.readthedocs.io/en/latest/user_guide/runtime_ima.html)
