@@ -28,18 +28,11 @@ Example:
 [defaults] 
 private_key_file = /home/.ssh/my_gcp_key
 ```
-9. Add values to the environment variables in set_env_var.sh and run the script. \
-`. set_env_var.sh`
+9.Run the script to set up the environment.
 ```
-#!/bin/sh
-export GCP_PROJECT= # ID of GCP project
-export GCP_CRED_KIND="serviceaccount" 
-export GCP_CRED_FILE= # path to service account file
-export GCP_CRED_EMAIL= # service account email
-export GCP_ZONE= # zone for GCP instance, ex "northamerica-northeast1-a"
-export GCP_REGION= # region for GCP instance, ex  "northamerica-northeast1"
+Warning: this script parses the GCP service account credential file for the email and project ID.
+Usage: . set_env_var.sh <path to JSON cred file> <GCP region> <GCP zone>
 ```
-Note: the project name is sometimes different from the project ID, check the ID to confirm. Otherwise errors will occur.
 ## Usage
 Run the playbook to create and set up an instance. 
 
@@ -51,7 +44,7 @@ ansible-playbook playbook.yml -e "custom-config=True"
 
 Otherwise, run the playbook with the flag ` -e "custom-config=False"`. This will generate an allowlist and include a default excludes list. 
 ```bash
-ansible-playbook playbook.yml -e "custom-config='False'"
+ansible-playbook playbook.yml -e "custom-config=False"
 ```
 
 ## Getting started with Keylime 
