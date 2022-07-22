@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 usage() {
 	echo "Warning: this script parses the GCP service account credential file for the email and project ID."
-        echo "Usage: . set_env_var.sh <path to JSON cred file> <GCP region> <GCP zone>"
+        echo "Usage: ./set_env_var.sh <path to JSON cred file> <GCP region> <GCP zone>"
 }
 if [[ ($# -ne 3) || ($@ == "--help") || ($@ == "-h") ]]
 then
@@ -22,3 +22,5 @@ export GCP_CRED_KIND="serviceaccount"
 echo "GCP CRED KIND is set to $GCP_CRED_KIND"
 export GCP_CRED_EMAIL="$(sed -e 's/^"//' -e 's/"$//' <<< "$(jq .client_email $1)")"
 echo "GCP CRED EMAIL is set to $GCP_CRED_EMAIL"
+echo "Launching shell with environment variables"
+$SHELL

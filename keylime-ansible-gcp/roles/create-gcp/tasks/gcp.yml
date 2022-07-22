@@ -26,7 +26,7 @@
 
 - name: Create the Fedora instance
   google.cloud.gcp_compute_instance:
-    name: test
+    name: keylime
     machine_type: e2-medium
     disks:
     - auto_delete: 'true'
@@ -56,6 +56,7 @@
         - https://www.googleapis.com/auth/servicecontrol
         - https://www.googleapis.com/auth/trace.append
     state: present
+    status: RUNNING
 
 - name: Add new GCP instance to hosts
   add_host: 

@@ -28,10 +28,11 @@ Example:
 [defaults] 
 private_key_file = /home/.ssh/my_gcp_key
 ```
-9.Run the script to set up the environment.
+9.Run the script to set up the environment. 
 ```
+./set_env_var.sh --help
 Warning: this script parses the GCP service account credential file for the email and project ID.
-Usage: . set_env_var.sh <path to JSON cred file> <GCP region> <GCP zone>
+Usage: ./set_env_var.sh <path to JSON cred file> <GCP region> <GCP zone>
 ```
 ## Usage
 Run the playbook to create and set up an instance. 
