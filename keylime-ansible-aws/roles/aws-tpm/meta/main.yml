@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Avery Blanchard
-  description: Keylime GCP
+  description: Ansible Keylime
   company: Red Hat
   min_ansible_version: 2.9
   platforms:
