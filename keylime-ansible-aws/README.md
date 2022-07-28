@@ -22,4 +22,4 @@ Once the ansible/aws ec2 ami module has the ability to support uefi/tpm, the nex
 4. Create a role to install keylime on the new instance
 
 ### Potential blockers 
-1. Automating using the EC2 serial console to boot via the UEFI shell (required for boot)
+1. Automating the EC2 serial console to boot via the UEFI shell (required for boot)
