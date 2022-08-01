@@ -16,10 +16,9 @@ self-signs binaries, and then takes snapshots of both volumes. From here, these 
 
 ### Next steps
 Once the ansible/aws ec2 ami module has the ability to support uefi/tpm, the next steps for this playbook are:
-1. Export binary blob to localhost to create AMI as uefi-data
-2. Use the snapshots to create an AMI with UEFI + TPM
-3. Add a task that creates an instance with this AMI
-4. Create a role to install keylime on the new instance
+1. Use the snapshots to create an AMI with UEFI + TPM
+2. Add a task that creates an instance with this AMI
+3. Create a role to install keylime on the new instance
 
 ### Potential blockers 
 1. Automating the EC2 serial console to boot via the UEFI shell (required for boot)
