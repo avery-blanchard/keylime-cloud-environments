@@ -6,7 +6,7 @@ For details on using Keylime, please consult the
 
 For details on the Rust agent, please consult the [repository](https://github.com/keylime/rust-keylime).
 
-## Developement
+## Development
 **This role is not ready for use.** The ansible AWS module currently does not have the functionality to create an AMI with UEFI and TPM enabled. 
 A [issue](https://github.com/ansible-collections/amazon.aws/issues/944) has been opened regarding this.
 
@@ -52,7 +52,7 @@ private_key_file=~/.ssh/aws.pem
 Run the playbook to create and set up an instance.
 
 ```bash
-ansible-playbook playbook.yml
+ansible-playbook create_aws_instance.yml
 ```
 ## Keylime Installation 
 To deploy keylime on this new VM against the vTPM, use this [ansible-keylime role](https://github.com/keylime/ansible-keylime)
